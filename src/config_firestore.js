@@ -3,6 +3,7 @@ import 'firebase/firestore';
   
   // Your web app's Firebase configuration
   // ** Important - rename this file to just firestore.js removing the config_
+  // create a collection called 'users' in firebase console
 
   var firebaseConfig = {
     apiKey: "",
