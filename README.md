@@ -1,7 +1,7 @@
 *Looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
 
 ---
-
+# svelte3_firebase_Crud_Auth
 # svelte app
 
 This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
@@ -91,4 +91,3 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
-# svelte3_firebase_Crud_Auth
