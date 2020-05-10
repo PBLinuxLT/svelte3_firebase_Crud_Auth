@@ -1,7 +1,7 @@
 <script>
 	import {db} from './firestore.js';
 	import firebase from 'firebase/app';
-	import 'firebase/auth';
+	import { onMount } from 'svelte';
 	import User from './user.svelte';
 
 	let users = [];
@@ -16,16 +16,7 @@
 	let userPw = '';
 	let userLoggedIn = false;
 
-	firebase.auth().onAuthStateChanged(function(user) {
-	if (user) {
-		console.log('User logged In');
-		userLoggedIn = true;
-		authEmail = user.email;
-	} else {
-		console.log('No User logged In');
-		userLoggedIn = false;
-	}
-	});
+	
 
 	function createAccount(){
 
@@ -39,8 +30,6 @@
 	});
 
 	}
-
-	
 
 	function signIn(){
 
@@ -62,16 +51,10 @@
 	firebase.auth().signOut().then(function() {
 	// Sign-out successful.
 	}).catch(function(error) {
-	console.log('DB Error:', error);
+	console.log('error signing out:', error);
 	});
 
 	}
-	
-	
-	db.collection('users').orderBy("name").onSnapshot(data => {
-		users = data.docs;
-	});
-
 
 	function addNewUser(){
 		db.collection('users').add(newUser)
@@ -90,6 +73,23 @@
 	}
 
 	
+	onMount(()=> {
+		// add listener for auth state changes
+		firebase.auth().onAuthStateChanged(function(user) {
+	if (user) {
+		console.log('User logged In');
+		userLoggedIn = true;
+		authEmail = user.email;
+	} else {
+		console.log('No User logged In');
+		userLoggedIn = false;
+	}
+	});
+		// get Users from Firebase
+		db.collection('users').orderBy("name").onSnapshot(data => {
+		users = data.docs;
+		});
+	});
 
 </script>
 
